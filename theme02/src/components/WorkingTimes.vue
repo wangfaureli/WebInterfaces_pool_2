@@ -24,8 +24,6 @@ export default {
   async mounted() {
     this.userId = this.$route.params.userId;
     this.workingTimes = await api.getWorkingTimes(this.userId);
-  },
-  methods: {
-  },
+  }
 };
 </script>

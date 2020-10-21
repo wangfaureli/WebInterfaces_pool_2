@@ -9,7 +9,6 @@ export default {
     },
     getUserClocks: async (userId) => {
         const response = await axios.get(`${apiUrl}/clocks/${userId}`);
-        const data = await response.data.data;
-        return data;
+        return await response.data.data;
     }
 };
