@@ -9,25 +9,26 @@ import ChartManager from './components/ChartManager.vue';
 Vue.use(Router);
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/workingTimes/:userid',
+      path: '/workingTimes/:userId',
       component: WorkingTimes,
     },
     {
-      path: '/workingTime/:userid',
+      path: '/workingTime/:userId',
       component: WorkingTime,
     },
     {
-      path: '/workingTime/:userid/:workingtimeid',
+      path: '/workingTime/:userId/:workingtimeid',
       component: WorkingTime,
     },
     {
-      path: '/clock/:userid',
+      path: '/clock/:userId',
       component: ClockManager,
     }, 
     { 
-      path: '/chartManager/:userid',
+      path: '/chartManager/:userId',
       component: ChartManager,
     },
   ],
