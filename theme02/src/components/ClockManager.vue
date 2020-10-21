@@ -16,7 +16,7 @@ export default {
       clockIn: "",
     };
   },
-  created: function () {
+  async mounted() {
     if (this.$route.params.userid != null) {
       this.userId = this.$route.params.userid;
     }

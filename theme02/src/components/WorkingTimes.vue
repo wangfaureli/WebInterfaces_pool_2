@@ -1,12 +1,18 @@
 <template>
   <div>
-    <p class="">Ici c'est WorkingTimes</p>
-    <p class="">userid envoyé en paramètre : {{ userId }}</p>
+    <h3>WorkingTimes</h3>
+    <div><i>for user {{ userId }}</i></div>
+    <br />
+    <div v-for="(item, key) in workingTimes" :key="key">
+      <div><b>start time :</b> {{ item.start }}</div>
+      <div><b>end time :</b> {{ item.end }}</div>
+      <br />
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import api from '@/api';
 
 export default {
   data() {
@@ -15,21 +21,9 @@ export default {
       workingTimes: ""
     };
   },
-  created: function () {
-    // if (this.$route.params.userid != null) {
-      console.log(this.$route);
-      this.userId = this.$route.params.userid;
-    // }
-  },
-  methods: {
-    getWorkingTimes() {
-      axios
-        .get(URL)
-        .then((response) => {
-          this.param = response.data.param;
-        })
-        .catch(() => {});
-    },
-  },
+  async mounted() {
+    this.userId = this.$route.params.userId;
+    this.workingTimes = await api.getWorkingTimes(this.userId);
+  }
 };
 </script>
