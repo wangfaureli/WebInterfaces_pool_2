@@ -1,22 +1,29 @@
 <template>
   <div class="container mt-5 mb-5">
-    <div class="d-flex">
-      <select v-model="userSelected" class="w-100 mr-5">
-        <option
-          v-for="userItem in users"
-          :key="userItem.id"
-          :value="userItem.id"
-        >
-          {{ userItem.username }}
-        </option>
-      </select>
+    <div class="d-flex flex-column">
+      <p class="" v-if="userId == ''">
+        Si la liste est vide et que vous être sur un menu, veuillez raffraichir
+        la page
+      </p>
 
-      <input
-        type="submit"
-        class="btn btn-primary"
-        value="Changer d'utilisateur"
-        @click="getUserPage(userSelected)"
-      />
+      <div class="d-flex">
+        <select v-model="userSelected" class="w-100 mr-5">
+          <option
+            v-for="userItem in users"
+            :key="userItem.id"
+            :value="userItem.id"
+          >
+            {{ userItem.username }}
+          </option>
+        </select>
+
+        <input
+          type="submit"
+          class="btn btn-primary"
+          value="Changer d'utilisateur"
+          @click="getUserPage(userSelected)"
+        />
+      </div>
     </div>
     <hr class="mt-5" />
     <div class="d-flex flex-column align-items-center">

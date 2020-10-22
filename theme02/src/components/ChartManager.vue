@@ -1,10 +1,6 @@
 <template>
   <div>
-    <p class="">Ici c'est ChartManager</p>
-    <p class="">userid envoyé en paramètre : {{ userId }}</p>
-
-    <h3>WorkingTimes</h3>
-    <div><i>for user {{ userId }}</i></div>
+    <h3>Chart Manager</h3>
     <br />
     <div v-for="(item, key) in workingTimes" :key="key">
       <div><b>start time :</b> {{ item.start }}</div>
