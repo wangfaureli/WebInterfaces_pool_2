@@ -1,8 +1,6 @@
 <template>
   <div>
-    <p class="">Ici c'est WorkingTime</p>
-    <p class="">userid envoyé en paramètre : {{ userId }}</p>
-    <p class="">workingTimeId envoyé en paramètre : {{ workingTimeId }}</p>
+    <h3>Working Time</h3>
   </div>
 </template>
 

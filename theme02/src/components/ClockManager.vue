@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p class="">Ici c'est ClockManager</p>
-    <p class="">userid envoyé en paramètre : {{ userId }}</p>
+    <h3 class="">Clock Manager</h3>
   </div>
 </template>
 
