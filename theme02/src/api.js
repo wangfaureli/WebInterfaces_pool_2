@@ -61,5 +61,17 @@ export default {
         });
         // return await response.data.data;
         console.log(response.data);
+    },
+    CreateClock: async (time, status, userId) => {
+        const response = await axios.post(`${apiUrl}/clocks/${userId}`, {
+            clock: {
+                time: time,
+                status: status,
+                userid: userId
+            }
+        });
+        // return await response.data.data;
+        console.log(response.data);
     }
+
 };

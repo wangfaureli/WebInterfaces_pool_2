@@ -49,11 +49,11 @@
 </template> 
 
 <script>
-import User from "./components/User.vue";
+//import User from "./components/User.vue";
 export default {
   name: "App",
   components: {
-    User,
+    //User,
   },
   created() {
     if (this.userId == "") {
