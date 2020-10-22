@@ -20,7 +20,7 @@ const router = new Router({
       component: WorkingTime,
     },
     {
-      path: '/workingTime/:userId/:workingtimeid',
+      path: '/workingTime/:userId/:workingTimeId',
       component: WorkingTime,
     },
     {
