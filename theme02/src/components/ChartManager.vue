@@ -2,6 +2,16 @@
   <div>
     <p class="">Ici c'est ChartManager</p>
     <p class="">userid envoyé en paramètre : {{ userId }}</p>
+
+    <h3>WorkingTimes</h3>
+    <div><i>for user {{ userId }}</i></div>
+    <br />
+    <div v-for="(item, key) in workingTimes" :key="key">
+      <div><b>start time :</b> {{ item.start }}</div>
+      <div><b>end time :</b> {{ item.end }}</div>
+      <br />
+    </div>
+
     <donut-chart 
       id="donut" 
       :data="donutData" 
@@ -46,32 +56,39 @@ import axios from "axios";
 import Raphael from 'raphael/raphael'
 global.Raphael = Raphael
 import { DonutChart, BarChart, AreaChart } from 'vue-morris'
+import api from '@/api';
 
 export default {
   data() {
     return {
       userId: "",
-      donutData: [
-      { label: 'Red', value: 300 },
+      donutData: [],
+      barData: [],
+      areaData: []
+    };
+  },
+  components:{DonutChart, BarChart, AreaChart},
+  async mounted() {
+    this.userId = this.$route.params.userId;
+    this.donutData = [
+      { label: 'Red', value: this.userId },
       { label: 'Blue', value: 50 },
       { label: 'Yellow', value: 100 }
-    ],
-      barData: [
+    ]
+    this.barData = [
       { "year": "2013", "and": 10, "ios": 5, "win": 2 },
       { "year": "2014", "and": 10, "ios": 15, "win": 3 },
       { "year": "2015", "and": 20, "ios": 25, "win": 2 },
       { "year": "2016", "and": 30, "ios": 20, "win": 1 },
-    ],
-      areaData: [
+    ]
+    this.areaData = [
       { "year": "2013", "a": 30, "b": 5 },
       { "year": "2014", "a": 35, "b": 15 },
       { "year": "2015", "a": 29, "b": 25 },
       { "year": "2016", "a": 50, "b": 20 },
     ]
-    };
+    this.workingTimes = await api.getWorkingTimes(this.userId);
   },
-  components:{DonutChart, BarChart, AreaChart},
-
   created: function () {
     if (this.$route.params.userid != null) {
       this.userId = this.$route.params.userid;
