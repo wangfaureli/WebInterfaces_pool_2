@@ -35,11 +35,13 @@
       </div>
     </nav>
 
-    <!-- <div v-if="userId"> -->
-    <User />
-    <!-- </div> -->
-    <!-- <div v-else>coucou</div> -->
-
+    <div v-if="userId">
+      <User />
+    </div>
+    <div v-else class="d-flex justify-content-center flex-column align-items-center mt-5">
+      <h3>Bienvenue sur le Time Manager</h3>
+      <p class="">Veuillez selectionner un menu,car vous le constatez, il n'y a rien ici !</p>
+    </div>
     <div class="container">
       <router-view></router-view>
     </div>
@@ -52,6 +54,11 @@ export default {
   name: "App",
   components: {
     User,
+  },
+  created() {
+    if (this.userId == "") {
+      this.userId = 1;
+    }
   },
   methods: {
     goto(route) {

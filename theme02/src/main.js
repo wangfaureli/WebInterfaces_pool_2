@@ -36,6 +36,7 @@ const router = new Router({
       name: 'chart',
       component: ChartManager,
     },
+    { path: '/', redirect: '/workingTimes/1'}
   ],
 });
 
