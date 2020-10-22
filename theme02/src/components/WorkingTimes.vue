@@ -17,12 +17,11 @@ import api from '@/api';
 export default {
   data() {
     return {
-      userId: "",
       workingTimes: ""
     };
   },
   async mounted() {
-    this.userId = this.$route.params.userId;
+    await this.userId;
     this.workingTimes = await api.getWorkingTimes(this.userId);
   }
 };
