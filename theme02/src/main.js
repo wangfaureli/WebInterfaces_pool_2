@@ -13,24 +13,30 @@ const router = new Router({
   routes: [
     {
       path: '/workingTimes/:userId',
+      name: 'workingTimes',
       component: WorkingTimes,
     },
     {
       path: '/workingTime/:userId',
+      name: 'workingTime',
       component: WorkingTime,
     },
     {
       path: '/workingTime/:userId/:workingTimeId',
+      name: 'workingTimesUserAndWorking',
       component: WorkingTime,
     },
     {
       path: '/clock/:userId',
+      name: 'clock',
       component: ClockManager,
     },
     {
       path: '/chartManager/:userId',
+      name: 'chart',
       component: ChartManager,
     },
+    { path: '/', redirect: '/workingTimes/1'}
   ],
 });
 

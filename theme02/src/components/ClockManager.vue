@@ -1,4 +1,5 @@
 <template>
+
   <div class="jumbotron jumbotron-fluid" id="main">
     <h1> ClockManager!</h1>
     <h6> UserID envoyé en paramètre : <b>{{ userId }}</b></h6>
@@ -19,6 +20,7 @@
       <button type="button" class="btn btn-danger" @click="Stop()" v-else>Stop</button>
       <button type="button" class="btn btn-info" @click="Reset()">Reset</button>         
     </div>
+
   </div>
 </template>
 
