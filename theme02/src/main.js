@@ -26,17 +26,20 @@ const router = new Router({
     {
       path: '/clock/:userId',
       component: ClockManager,
-    }, 
-    { 
+    },
+    {
       path: '/chartManager/:userId',
       component: ChartManager,
     },
   ],
 });
 
-Vue.config.productionTip = false;
+Vue.prototype.userId = '';
 
 new Vue({
   router,
+  async mounted() {
+    Vue.prototype.userId = this.$route.params.userId;
+  },
   render: (h) => h(App),
 }).$mount('#app');

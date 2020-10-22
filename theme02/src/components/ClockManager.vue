@@ -1,16 +1,23 @@
 <template>
-  <div>
-    <p class="">Ici c'est ClockManager</p>
-    <p class="">userid envoyé en paramètre : {{ userId }}</p>
+  <div class="jumbotron jumbotron-fluid" id="main">
+    <h1> ClockManager!</h1>
+    <h6> UserID envoyé en paramètre : <b>{{ userId }}</b></h6>
 
-    <span>{{workMessage}}</span><br>
+    <div class="alert alert-danger" role="alert" v-if="clockIn">
+      Attention! Le travail est en cours.
+    </div>
+    <div class="alert alert-success" role="alert" v-else>
+      Yes! le travail est terminé.
+  </div>
+
   
-    <span class="time">{{ time }}</span>
+    <div class="time"><h4>{{ time }}</h4></div>
+    <button type="button" class="btn btn-primary btn-lg">{{formatTime}}</button>
   
     <div class="btn-container">
-      <button @click="start()">Start</button>
-      <button @click="stop()">Stop</button>
-      <button @click="reset()">Reset</button>      
+      <button type="button" class="btn btn-success" @click="Start()" v-if="!clockIn">Start</button>      
+      <button type="button" class="btn btn-danger" @click="Stop()" v-else>Stop</button>
+      <button type="button" class="btn btn-info" @click="Reset()">Reset</button>         
     </div>
   </div>
 </template>
@@ -26,15 +33,13 @@ export default {
     return {
       time:  moment().format('LLLL'),
       userId: "",
+      timeState: 'Stopped',
       clockStaus: 'inactive',
-      workMessage: "The work is terminated.",
+      formatTime: '00:00:00',
       startDateTime: "",
       clockIn: false,
-      startingTime: null,
-      stoppedTime : null,
-      duration : 0,
-      started : null,
-      running : false,
+      startingTime: 0,                 
+      ticker: undefined
     };
   },
   //  async mounted() {
@@ -43,13 +48,11 @@ export default {
   // },
   methods: {
     refresh() {
-      if(this.clockIn)
-      {
-        this.workMessage= 'The work is terminated.'
+      if(this.timeState == 'Paused'|| this.timeState =='Stopped')
+      {        
         this.clockIn = false;
         
-      }else {
-          this.workMessage = 'The work is in Progress.'
+      }else if (this.timeState == 'Running'){          
           this.clockIn = true;
       }
     },
@@ -58,9 +61,59 @@ export default {
       {
         this.clockStaus = 'active'
       }
-        api.CreateClock(this.startingTime, this.clockStaus, this.userId);
+        api.CreateClock(moment().format('MMMM Do YYYY, h:mm:ss a'), this.clockStaus, this.userId);
     },
+
+    //Functions pour le chronomètre!
+    Start(){
+      if(this.timeState !== 'Running')
+      {
+        console.log(this.timeState = 'Running');
+        this.refresh();
+        this.Tick();
+        //on stocke les informations de clock dans la BDD
+        this.clock();
+      }
+    },    
+    Stop(){
+      window.clearInterval(this.ticker);      
+      this.timeState = 'Stopped';
+      this.refresh();
+    },
+    Reset(){
+      window.clearInterval(this.ticker);
+      this.startingTime = 0;
+      this.formatTime = '00:00:00';
+      this.refresh;
+    },
+    Tick()
+    {
+      this.ticker = setInterval(()=>{
+        this.startingTime++;
+        this.formatTime = this.Count(this.startingTime);
+      },250)
+      console.log(this.startingTime);
+    },
+    Count(sec)
+    {
+      let mesuredTime = new Date(null);
+      mesuredTime.setSeconds(sec);
+      let mesuredHour = mesuredTime.toISOString().substr(11,8);
+      return mesuredHour;
+    }
     
   },
 };
 </script>
+<style>
+#main{
+  margin: 15px;
+  text-align: center;
+}
+#date{
+  text-decoration: brown;
+}
+.btn{
+  margin: 10px;
+}
+</style>
