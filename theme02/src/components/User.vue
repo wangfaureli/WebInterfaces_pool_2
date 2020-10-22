@@ -1,33 +1,35 @@
 <template>
   <div>
-    <p class="">Ici c'est User</p>
-    <p class="">userid envoyé en paramètre : {{ userId }} </p>
+    <input v-model="username" type="text" />
+    <input v-model="email" type="email" />
+    <input
+      class="btn btn-primary"
+      type="submit"
+      value="Ajouter l'utilisateur"
+      @click="createUser(username, email)"
+    />
+  <p class="">{{ user.username }} - {{ user.email }}</p>
   </div>
+
 </template>
 
 <script>
-import axios from "axios";
+import api from "@/api";
 
 export default {
   data() {
     return {
-        userId = ""
+      userId: "",
+      user: "",
     };
   },
-  created: function () {
-    if (this.$route.params.userid != null) {
-      console.log(this.$route);
-      this.userId = this.$route.params.userid;
-    }
+  async mounted() {
+    this.userId = this.$route.params.userId;
+    this.user = await api.getUser(this.userId);
   },
   methods: {
     createUser() {
-      axios.get(URL)
-        .then((response) => {
-          this.param = response.data.param
-        })
-        .catch(() => {
-        });
+      api.createUser(this.username, this.email);
     },
 
     updateUser() {},
