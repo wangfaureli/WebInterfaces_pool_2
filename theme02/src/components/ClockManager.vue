@@ -25,7 +25,6 @@
 <script>
 //import axios from "axios";
 import api from "@/api";
-//import clockFunctions from '@/clock'
 import moment from 'moment'
 
 export default {
@@ -42,10 +41,10 @@ export default {
       ticker: undefined
     };
   },
-  //  async mounted() {
-  //   this.userId = this.$route.params.userId;
-  //   this.clocks = await api.getUserClocks(this.userId);
-  // },
+   async mounted() {
+    this.userId = this.$route.params.userId;
+    this.clocks = await api.getUserClocks(this.userId);
+  },
   methods: {
     refresh() {
       if(this.timeState == 'Paused'|| this.timeState =='Stopped')
@@ -68,7 +67,7 @@ export default {
     Start(){
       if(this.timeState !== 'Running')
       {
-        console.log(this.timeState = 'Running');
+        this.timeState = 'Running';
         this.refresh();
         this.Tick();
         //on stocke les informations de clock dans la BDD
@@ -79,20 +78,24 @@ export default {
       window.clearInterval(this.ticker);      
       this.timeState = 'Stopped';
       this.refresh();
+      this.clock();
     },
     Reset(){
       window.clearInterval(this.ticker);
       this.startingTime = 0;
       this.formatTime = '00:00:00';
       this.refresh;
+      if(this.timeState == 'Running')
+      {
+        this.Stop();
+      }
     },
     Tick()
     {
       this.ticker = setInterval(()=>{
         this.startingTime++;
         this.formatTime = this.Count(this.startingTime);
-      },250)
-      console.log(this.startingTime);
+      },250)      
     },
     Count(sec)
     {
