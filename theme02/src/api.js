@@ -10,5 +10,9 @@ export default {
     getUserClocks: async (userId) => {
         const response = await axios.get(`${apiUrl}/clocks/${userId}`);
         return await response.data.data;
+    },
+    getChartManager: async (userId) => {
+        const response = await axios.get(`${apiUrl}/ChartManager/${userId}`);
+        return await response.data.data;
     }
 };

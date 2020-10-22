@@ -11,7 +11,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-        userId = ""
+        userId :""
     };
   },
   created: function () {
