@@ -1,22 +1,23 @@
 <template>
   <div id="app">
     <User />
-    <router-view></router-view>
+
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
-</template>
+</template> 
 
 <script>
-
-import User from "./components/User.vue"
+import User from "./components/User.vue";
 export default {
   name: "App",
   components: {
-    User
-   },
+    User,
+  },
 };
 </script>
 
 <style>
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
 </style>

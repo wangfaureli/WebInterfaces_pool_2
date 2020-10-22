@@ -1,7 +1,6 @@
 <template>
   <div>
     <h3>WorkingTimes</h3>
-    <div><i>for user {{ userId }}</i></div>
     <br />
     <div v-for="(item, key) in workingTimes" :key="key">
       <div><b>start time :</b> {{ item.start }}</div>

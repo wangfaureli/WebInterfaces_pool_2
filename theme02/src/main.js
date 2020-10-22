@@ -38,10 +38,8 @@ Vue.prototype.userId = '';
 
 new Vue({
   router,
-  render: (h) => h(App),
   async mounted() {
-    console.log(this.userId);
     Vue.prototype.userId = this.$route.params.userId;
-    console.log(this.userId);
   },
+  render: (h) => h(App),
 }).$mount('#app');
